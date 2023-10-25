@@ -45,30 +45,26 @@ public:
     // Other methods...
 
     void resize() {
-         
-        if (this->entriesCount < this->length - 1) {
+          if (this->entriesCount < this->length - 1) {
             return;
         } else {
-       int old_length = this->length;     
-       this->length = this->length * 2;
+            int newSize = this->length * 2;
+            KeyValuePair* entries_copy = new KeyValuePair[length];
 
-       KeyValuePair* entries_copy = new KeyValuePair[old_length]; 
-       for(int i = 0 ; i < old_length ; i++){
+            for (int i = 0; i < length; i++) {
+                entries_copy[i] = this->entries[i];
+            }
 
-            entries_copy[i] = this->entries[i];
+            delete[] this->entries;
+            int entries_copy_len = this->length;
+            this->entries = new KeyValuePair[newSize];
+            this->length = newSize;
 
-       }
-
-       delete[] this->entries ;
-       this->entries = new KeyValuePair[this->length];
-       this->entriesCount = 0; 
-       for(int i = 0 ; i < old_length ; i++){
-
-            if(this->entries[i].getKey().empty()){continue;}
-            Add_to_entries(entries_copy[i].getKey(),entries_copy[i].getValue());
-
-       }
-
+            for (int i = 0; i < entries_copy_len; i++) {
+                if(entries_copy[i].getKey().empty()){continue;}
+                Add_to_entries(entries_copy[i].getKey(),entries_copy[i].getValue());
+            }
+            delete[] entries_copy;
         }
     }
 
@@ -199,9 +195,9 @@ public:
 
     void print() {
     for (int i = 0; i < this->length; i++) {
-        if (!this->entries[i].getKey().empty()) {
+        
             cout << "key: " << this->entries[i].getKey() << " value: " << this->entries[i].getValue() << endl;
-        }
+        
     }
 }
 
