@@ -176,19 +176,30 @@ public:
 
     bool Remove(T key){
 
-        for(int i = 0; i < this->length;i++){
+        
+            
+        int hash = get_hash(key);
+        if(!this->entries[hash].getKey().empty() && this->entries[hash].getKey() != key){
+            hash = collision_handling(key,hash,false);
+        }
 
-            if(!this->entries[i].getKey().empty() && this->entries[i].getKey() == key ){
+        if(hash == -1 || this->entries[hash].getKey().empty()){
+            return "NULL";
+        }
 
-                this->entries[i] = this->entries[this->entriesCount-1];
-                this->entries[this->entriesCount-1] = KeyValuePair();
-                this->entriesCount--;
-                return true;
+        if(this->entries[hash].getKey() == key){
+            
+            this->entries[hash] = KeyValuePair();
+            this->entriesCount--;
+            return true;
+
+        }else{
+            throw runtime_error("invalid hashTable");
             }
 
 
-    }
-    return false;
+    
+    
     }
 
     int size() { return entriesCount; }
@@ -216,7 +227,9 @@ int main() {
         hash_table.set("2","samir");
         hash_table.set("3","saleh");
         hash_table.print();
-
+        hash_table.Remove("2");
+        cout<< "after remove"<<endl;
+        hash_table.print();
         
 
   
