@@ -14,7 +14,7 @@ public:
     // Convert string to byte array
     const char *data = str.c_str();
     size_t len = str.length();
-    uint8_t *bytes = new uint8_t[len];
+    uint8_t bytes = new uint8_t[len];
     memcpy(bytes, data, len);
 
     // Compute hash using FNV-1 algorithm
