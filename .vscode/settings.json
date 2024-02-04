@@ -1,0 +1,29 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "new": "cpp",
+        "cstdint": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "memory": "cpp",
+        "optional": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "array": "cpp",
+        "functional": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "stdexcept": "cpp",
+        "typeinfo": "cpp",
+        "charconv": "cpp",
+        "chrono": "cpp",
+        "format": "cpp",
+        "ratio": "cpp",
+        "ostream": "cpp",
+        "span": "cpp",
+        "compare": "cpp",
+        "variant": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
+}
