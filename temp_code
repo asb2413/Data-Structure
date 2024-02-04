@@ -1,0 +1,80 @@
+ /*void print() {
+    Queue<Tree_node<type>*> queue;
+    queue.enqueue(root);
+
+    while (!queue.is_empty()) {
+        Tree_node<type>* current_node = queue.dequeue();
+        
+        if (current_node != nullptr) {
+            cout << current_node->data << endl;
+
+            if (current_node->left) {
+                queue.enqueue(current_node->left);
+            }
+
+            if (current_node->right) {
+                queue.enqueue(current_node->right);
+            }
+        }
+    }
+}*/
+
+
+
+/*
+
+ void insert(type _data) {
+    Tree_node<type>* new_node = new Tree_node<type>(_data);
+
+    if (root == nullptr) {
+        root = new_node;
+        return;
+    }
+
+    Queue<Tree_node<type>*> queue;
+    queue.enqueue(root);
+
+    while (!queue.is_empty()) {
+        Tree_node<type>* current_node = queue.dequeue();
+
+        if (current_node->left == nullptr) {
+            current_node->left = new_node;
+            break;
+        } else {
+            queue.enqueue(current_node->left);
+        }
+
+        if (current_node->right == nullptr) {
+            current_node->right = new_node;
+            break;
+        } else {
+            queue.enqueue(current_node->right);
+        }
+    }
+}
+
+*/
+
+/*
+
+while (!queue.empty()) {
+        Tree_node<type>* current_node = queue.front();
+        queue.pop();
+
+        if (current_node->left == nullptr) {
+            current_node->left = new_node;
+            break;
+        } else {
+            queue.push(current_node->left);
+        }
+
+        if (current_node->right == nullptr) {
+            current_node->right = new_node;
+            break;
+        } else {
+            queue.push(current_node->right);
+        }
+    }
+}
+
+*/

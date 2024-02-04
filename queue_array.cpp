@@ -2,49 +2,64 @@
 using namespace std;
 
 
-#include <iostream>
-using namespace std;
-
-class queue{
-
+template<typename type>
+class Queue{
     private:
+    type* entries;
     int head;
     int tail;
-    int array[5];
+    int init_Size = 6 ;
+    int length;
+    int entries_count;
 
     public:
-    queue(){
+    
+    Queue(){
 
+        this->entries = new type[init_Size];
+        this->length = init_Size;
+        this->entries_count = 0; 
         this->head = -1;
         this->tail = -1;
+
     }
 
+    //resize function when queue is full
+
+    void resize(){
+
+        if(this->entries_count == this->length - 1){
+
+            int new_size = this->length + init_Size;
+            type *new_entries = new type[new_size];
+            for(int i = 0; i < this->length; i++){
+
+                	new_entries[i] = this->entries[i];
+
+            } 
+
+            delete[] entries;
+            this->entries = new_entries;
+            
+            this->length = new_size;
+
+        }
+
+    }
+
+    //queue empty check
     bool is_empty(){
 
-        if(this->head== -1 && this->tail == -1){
-
-            return true;
-
-        }else{return false;}
-        
-        
+        if(this->head == -1 && this->tail == -1){ return true;}
+        return false;
     }
 
-    bool is_full(){
+    //queue enqueue
+    void enqueue(type _data){
 
-        int size = sizeof(array)/sizeof(array[0]);
-        if(this->tail == size - 1){
+        resize();
 
-            return true;
-
-        }else{return false;}
-
-    }
-
-    void enqueue(int _data){
-
-        if(this->is_full()){return;}
-        if(this->is_empty()){
+        if(is_empty()){
 
             this->head = this->tail = 0;
 
@@ -54,31 +69,58 @@ class queue{
 
         }
 
-        this->array[tail] = _data;
+        this->entries[tail] = _data;
+        this->entries_count++;
 
     }
 
+//queue dequeue
+    type dequeue(){
 
-    int dequeue(){
-        
-        if(is_empty())
-        {
-        return -1;
-        }else{
-
-            int current_head = this->head;
-            this->head++;
-            return  array[current_head];
+        /*if (((this->head == -1 && this->tail == -1) || (this->entries[this->tail] == type() || this->entries[this->tail] == nullptr)) &&
+        (this->entries[this->head] == type() || this->entries[this->head] == nullptr))*/
+        if(this->head == -1 && this->tail == -1 || this->entries[this->head]== type() && this->entries[this->head]== type()){
             
-        }
+            return "queue is empty";
+            
+            }else{
 
-       
+            type current_data = this->entries[this->head];
+            this->entries[this->head] = type();
+            this->head++;
+            this->entries_count--;
+            return  current_data;
 
-    }   
+            }
+        
 
-    void size(){
+    }
 
-        cout << "Queue size: " <<tail - head + 1<<endl;
+    // queue peak
+
+    type peak(){
+
+        if(this->head == -1 && this->tail == -1){
+            
+            return "queue is empty";
+            
+            }else{
+
+            return  this->entries[this->head];
+
+            }
+
+    }
+
+    int entries_in_queue(){
+
+        return this->entries_count;
+
+    }
+
+    int queue_size(){
+
+        return this->length;
 
     }
 
